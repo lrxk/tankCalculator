@@ -63,10 +63,13 @@ class App:
         self.paramButton["command"] = self.paramButtonCommand
 
     def compute(self):
+        if self.entry.get()=='':
+            result="Enter a number"
+            return result
         result=float(int(self.entry.get())*self.tankHeight*self.tankWidth)/1000.0
         return result
     def okButtonCommand(self):
-        self.result["text"] =str(self.compute())
+        self.result["text"] =str(self.compute())+"L"
     def paramButtonCommand(self):
         # function to open a new window
         # on a button click
