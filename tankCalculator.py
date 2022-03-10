@@ -8,7 +8,7 @@ class App:
         self.root=root
         #setting title
         root.title("TankCalculator")
-        #setting window size
+        #setting window size 
         width=600
         height=500
         screenwidth = root.winfo_screenwidth()
@@ -16,8 +16,8 @@ class App:
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
-
-        self.entry=tk.Entry(root)
+        vcmd = (self.root.register(self.callback))
+        self.entry=tk.Entry(root,validate='all',validatecommand=(vcmd,'%P'))
         self.entry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         self.entry["font"] = ft
@@ -61,7 +61,11 @@ class App:
         self.paramButton["text"] = "Parameters"
         self.paramButton.place(x=260,y=170,width=70,height=25)
         self.paramButton["command"] = self.paramButtonCommand
-
+    def callback(self, P):
+        if str.isdigit(P) or P == "":
+            return True
+        else:
+            return False
     def compute(self):
         if self.entry.get()=='':
             result="Enter a number"
