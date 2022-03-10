@@ -99,8 +99,8 @@ class App:
         self.longueur["justify"] = "center"
         self.longueur["text"] = "Longueur"
         self.longueur.place(x=x,y=30,width=70,height=25)
-        
-        self.longueurEntry=tk.Entry(self.newWindow)
+        vcmd=(self.newWindow.register(self.callback))
+        self.longueurEntry=tk.Entry(self.newWindow,validate='all',validatecommand=(vcmd,'%P'))
         self.longueurEntry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         self.longueurEntry["font"] = ft
@@ -117,7 +117,7 @@ class App:
         self.largeur["text"] = "Largeur"
         self.largeur.place(x=x,y=100,width=70,height=25)
 
-        self.largeurEntry=tk.Entry(self.newWindow)
+        self.largeurEntry=tk.Entry(self.newWindow,validate='all',validatecommand=(vcmd,'%P'))
         self.largeurEntry["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=10)
         self.largeurEntry["font"] = ft
