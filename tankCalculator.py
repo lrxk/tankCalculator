@@ -2,9 +2,11 @@ import tkinter as tk
 import tkinter.font as tkFont
 
 class App:
+    """ function to open a new window to get the parameters """
     tankWidth=180
     tankHeight=200
     def __init__(self, root):
+        """ function to initialize the app """
         self.root=root
         #setting title
         root.title("TankCalculator")
@@ -41,7 +43,7 @@ class App:
         self.indicator["font"] = ft
         self.indicator["fg"] = "#333333"
         self.indicator["justify"] = "center"
-        self.indicator["text"] = "Enter a number"
+        self.indicator["text"] = "Enter a height in cm"
         self.indicator.place(x=240,y=20,width=108,height=30)
 
         self.result=tk.Label(root)
@@ -62,19 +64,24 @@ class App:
         self.paramButton.place(x=260,y=170,width=70,height=25)
         self.paramButton["command"] = self.paramButtonCommand
     def callback(self, P):
+        """ function to check if the entry is a number """
         if str.isdigit(P) or P == "":
             return True
         else:
             return False
     def compute(self):
+        """ function to compute the volume of the tank """
         if self.entry.get()=='':
             result="Enter a number"
             return result
+        # compute a volume
+        
         result=float(int(self.entry.get())*self.tankHeight*self.tankWidth)/1000.0
         return result
     def okButtonCommand(self):
         self.result["text"] =str(self.compute())+"L"
     def paramButtonCommand(self):
+        """ function to open a new window to get the values from the entry widgets """
         # function to open a new window
         # on a button click
 
@@ -137,6 +144,7 @@ class App:
         okParameterButton["command"] = self.okParameterButton_command
 
     def okParameterButton_command(self):
+        """ function to get the values from the entry widgets """
         self.tankWidth=int(self.largeurEntry.get())
         self.tankHeight=int(self.longueurEntry.get())
         self.newWindow.destroy()
@@ -144,6 +152,7 @@ class App:
 
 
 if __name__ == "__main__":
+    """ main function """
     root = tk.Tk()
     app = App(root)
     root.mainloop()
